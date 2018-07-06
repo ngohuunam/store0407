@@ -1,0 +1,121 @@
+{
+  "_id": "info",
+  "op": {
+    "type": [
+      {
+        "label": "Quần",
+        "value": "Quần"
+      },
+      {
+        "label": "Áo",
+        "value": "Áo"
+      },
+      {
+        "label": "Đầm",
+        "value": "Đầm"
+      },
+      {
+        "label": "Đồ bộ",
+        "value": "Đồ bộ"
+      }
+    ],
+    "gene": [
+      {
+        "label": "Bé trai",
+        "value": "Bé trai"
+      },
+      {
+        "label": "Bé gái",
+        "value": "Bé gái"
+      },
+      {
+        "label": "Uniex",
+        "value": "Uniex"
+      }
+    ],
+    "len": [
+      {
+        "label": "Dài",
+        "value": "Dài"
+      },
+      {
+        "label": "Ngắn",
+        "value": "Ngắn"
+      },
+      {
+        "label": "Lửng",
+        "value": "Lửng"
+      },
+      {
+        "label": "Soọc",
+        "value": "Soọc"
+      }
+    ],
+    "fabric": [
+      {
+        "label": "Jean",
+        "value": "Jean"
+      },
+      {
+        "label": "Cotton",
+        "value": "Cotton"
+      },
+      {
+        "label": "Thun",
+        "value": "Thun"
+      },
+      {
+        "label": "Khác",
+        "value": "Khác"
+      }
+    ],
+    "unit": [
+      {
+        "label": "Cái",
+        "value": "Cái"
+      },
+      {
+        "label": "Bộ",
+        "value": "Bộ"
+      }
+    ],
+    "design": [
+      {
+        "label": "In",
+        "value": "In"
+      },
+      {
+        "label": "Thêu",
+        "value": "Thêu"
+      },
+      {
+        "label": "Đơn màu",
+        "value": "Đơn màu"
+      },
+      {
+        "label": "Đa màu",
+        "value": "Đa màu"
+      },
+      {
+        "label": "Caro",
+        "value": "Caro"
+      },
+      {
+        "label": "Hoa văn",
+        "value": "Hoa văn"
+      },
+      {
+        "label": "Hình",
+        "value": "Hình"
+      },
+      {
+        "label": "Chữ",
+        "value": "Chữ"
+      },
+      {
+        "label": "Đính",
+        "value": "Đính"
+      }
+    ]
+  }
+}

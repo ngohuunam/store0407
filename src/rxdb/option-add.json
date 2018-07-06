@@ -1,0 +1,155 @@
+{
+  "_id": "add",
+  "op": {
+    "color": [
+      {
+        "label": "Vàng",
+        "value": "#ffff00"
+      },
+      {
+        "label": "Đỏ",
+        "value": "#ff0000"
+      },
+      {
+        "label": "Xanh lam",
+        "value": "#0000ff"
+      },
+      {
+        "label": "Xanh lá",
+        "value": "#00ff00"
+      },
+      {
+        "label": "Hồng",
+        "value": "#ff00ff"
+      },
+      {
+        "label": "Tím",
+        "value": "#673ab7"
+      },
+      {
+        "label": "Nâu",
+        "value": "#795548"
+      }
+    ],
+    "type": [
+      {
+        "label": "Số",
+        "value": "Số"
+      },
+      {
+        "label": "Chữ",
+        "value": "Chữ"
+      },
+      {
+        "label": "Tuổi",
+        "value": "Tuổi"
+      },
+      {
+        "label": "Cân nặng",
+        "value": "Cân nặng"
+      }
+    ],
+    "size": {
+      "Số": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "3",
+          "value": "3"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "6",
+          "value": "6"
+        }
+      ],
+      "Chữ": [
+        {
+          "label": "XS",
+          "value": "XS"
+        },
+        {
+          "label": "S",
+          "value": "S"
+        },
+        {
+          "label": "M",
+          "value": "M"
+        },
+        {
+          "label": "L",
+          "value": "L"
+        },
+        {
+          "label": "XL",
+          "value": "XL"
+        }
+      ],
+      "Tuổi": [
+        {
+          "label": "1-2 tuổi",
+          "value": "1-2 tuổi"
+        },
+        {
+          "label": "2-3 tuổi",
+          "value": "2-3 tuổi"
+        },
+        {
+          "label": "3-4 tuổi",
+          "value": "3-4 tuổi"
+        },
+        {
+          "label": "4-5 tuổi",
+          "value": "4-5 tuổi"
+        },
+        {
+          "label": "5-6 tuổi",
+          "value": "5-6 tuổi"
+        },
+        {
+          "label": "6-7 tuổi",
+          "value": "6-7 tuổi"
+        }
+      ],
+      "Cân nặng": [
+        {
+          "label": "8-10 kg",
+          "value": "8-10 kg"
+        },
+        {
+          "label": "10-12 kg",
+          "value": "10-12 kg"
+        },
+        {
+          "label": "12-14 kg",
+          "value": "12-14 kg"
+        },
+        {
+          "label": "14-16 kg",
+          "value": "14-16 kg"
+        },
+        {
+          "label": "16-18 kg",
+          "value": "16-18 kg"
+        },
+        {
+          "label": "18-20 kg",
+          "value": "18-20 kg"
+        }
+      ]
+    }
+  }
+}

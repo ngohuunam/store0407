@@ -1,0 +1,63 @@
+{
+  "_id": "item",
+  "op": {
+    "column-xs": {
+      "set": "S",
+      "color": "C",
+      "size": "S",
+      "quantity": "Q",
+      "shiping": "→",
+      "price": "$K",
+      "disc": "↓%",
+      "discQuantity": "↓Q",
+      "discStart": "↓↳",
+      "discStop": "↓↲",
+      "discDesc": "↓...",
+      "watch": "W"
+    },
+    "column": {
+      "set": "Set",
+      "color": "Color",
+      "size": "Size",
+      "quantity": "Quantity",
+      "shiping": "Shiping",
+      "price": "Price",
+      "disc": "Discount",
+      "discQuantity": "Disc Quantity",
+      "discStart": "Disc Start",
+      "discStop": "Disc Stop",
+      "discDesc": "Disc Desc",
+      "watch": "Watch"
+    },
+    "order": [
+      "quantity",
+      "shiping",
+      "price",
+      "disc",
+      "discQuantity",
+      "discStart",
+      "discStop",
+      "discDesc"
+    ],
+    "type": [
+      "number",
+      "number",
+      "number",
+      "number",
+      "number",
+      "date",
+      "date",
+      "text"
+    ],
+    "desc": [
+      "Số lượng hàng",
+      "Số lượng hàng đang ship",
+      "Đơn giá sản phẩm",
+      "Phầm trăm giảm giá",
+      "Số lượng hàng giảm giá",
+      "Ngày bắt đầu giảm giá",
+      "Ngày cuối cùng giảm giá",
+      "Ghi chú giảm giá"
+    ]
+  }
+}
