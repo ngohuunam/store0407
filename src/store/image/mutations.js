@@ -1,6 +1,14 @@
 // import Vue from 'vue'
 const loading = require('@/assets/loading.jpg')
 
+export const pushCart = (state, i) => {
+  state.cart.push(state.imgs[i])
+}
+export const spliceCart = (state, name) => {
+  const index = state.cart.findIndex(item => item.name === name)
+  if (index > -1) state.cart.splice(index, 1)
+}
+
 export const destroy = state => {
   console.log('destroy image')
   state.img$.unsubcribe()
@@ -34,13 +42,17 @@ export const init = (state, rxCol) => {
   state.ratioW = 0.5
   state.ratioH = 4 / 3
   state.cWidth = state.xs ? width * state.ratioW : state.maxWidth
-  state.cHeight = state.cWidth * state.ratioH
+  const pad = state.cWidth * 0.05
+  state.iWidth = state.cWidth
+  state.iHeight = state.iWidth * state.ratioH
+  state.cHeight = state.iHeight * 1.1
   state.op = op(state)
-  state.cardStyle = `width: ${state.cWidth}px; height: ${state.cHeight}px`
+  state.imgStyle = `width: ${state.iWidth}px; height: ${state.iHeight}px`
+  state.cardStyle = `width: ${state.cWidth}px; height: ${state.cHeight}px; padding:${pad}px`
   if (state.list.value && state.list.value.length) {
     const list = state.list.value
     list.forEach(name => {
-      state.imgs.push({ name: name, data: loading })
+      state.imgs.push({ name: name, data: loading, picked: false })
     })
   }
   state.ready = true
@@ -56,11 +68,6 @@ const op = state => {
   const activeClass = xs ? 'swiper-slide-active-xs' : 'swiper-slide-active'
   const slideClass = xs ? 'swiper-slide-xs' : 'swiper-slide'
   let options = {
-    // loop: true,
-    // loopAdditionalSlides: 20,
-    // loopedSlides: 20,
-    // freeMode: true,
-    // initialSlide: 1,
     slideClass: slideClass,
     slideActiveClass: activeClass,
     slidesPerView: 'auto',
@@ -72,10 +79,6 @@ const op = state => {
     const opNotXs = {
       // grabCursor: true,
       mousewheel: true,
-      // hashNavigation: true,
-      // hashNavigation: {
-      //   watchState: true,
-      // },
       keyboard: {
         enabled: true,
       },

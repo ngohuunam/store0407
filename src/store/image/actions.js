@@ -1,5 +1,5 @@
 import { filter } from 'rxjs/operators'
-import spinner from '@/assets/spiner.svg'
+const loading = require('@/assets/loading.jpg')
 
 export const subscribe = ({ commit, state, dispatch }) => {
   const img$ = state.rxImgs.$.pipe(filter(x => x != null)).subscribe(change => {
@@ -9,7 +9,7 @@ export const subscribe = ({ commit, state, dispatch }) => {
     const name = data.doc
     switch (event) {
       case 'INSERT':
-        commit('pushImgObj', { name: name, data: spinner })
+        commit('pushImgObj', { name: name, data: loading, picked: false })
         break
       case 'UPDATE':
         dispatch('UPDATE', data)
@@ -31,7 +31,7 @@ export const UPDATE = ({ commit, state }, data) => {
       .exec()
       .then(rxDoc => {
         const rxAtt = rxDoc.getAttachment(attName)
-        rxAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, data: base64 }))
+        rxAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, data: base64, picked: false }))
       })
   } else {
     commit('spliceImgObj', name)
