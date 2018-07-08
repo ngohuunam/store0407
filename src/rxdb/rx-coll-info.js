@@ -3,10 +3,10 @@ const rxCollInfo = [
   //   name: 'option',
   //   schema: require('./option-schema').default,
   // },
-  {
-    name: 'set',
-    schema: require('./set-schema').default,
-  },
+  // {
+  //   name: 'set',
+  //   schema: require('./set-schema').default,
+  // },
   {
     name: 'item',
     schema: require('./item-schema').default,
