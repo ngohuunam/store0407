@@ -39,16 +39,13 @@ export const init = (state, rxCol) => {
   const width = window.innerWidth
   state.xs = width < 576
   state.maxWidth = 400
-  state.ratioW = 0.5
+  state.ratioW = 0.42
   state.ratioH = 4 / 3
   state.cWidth = state.xs ? width * state.ratioW : state.maxWidth
   const pad = state.cWidth * 0.05
-  state.iWidth = state.cWidth
-  state.iHeight = state.iWidth * state.ratioH
-  state.cHeight = state.iHeight * 1.1
   state.op = op(state)
-  state.imgStyle = `width: ${state.iWidth}px; height: ${state.iHeight}px`
-  state.cardStyle = `width: ${state.cWidth}px; height: ${state.cHeight}px; padding:${pad}px`
+  state.imgStyle = `width: ${state.cWidth}px;`
+  state.cardStyle = `width: ${state.cWidth}px; padding:${pad}px; margin-bottom:${pad}px`
   if (state.list.value && state.list.value.length) {
     const list = state.list.value
     list.forEach(name => {
@@ -64,7 +61,7 @@ export const fecthImageList = (state, rxSetListDoc) => {
 
 const op = state => {
   const xs = state.xs
-  const space = xs ? Math.round(state.cWidth / 2.8) : 20
+  const space = xs ? Math.round(state.cWidth / 2.3) : 20
   const activeClass = xs ? 'swiper-slide-active-xs' : 'swiper-slide-active'
   const slideClass = xs ? 'swiper-slide-xs' : 'swiper-slide'
   let options = {

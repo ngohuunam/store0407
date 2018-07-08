@@ -1,6 +1,6 @@
 <template>
   <keep-alive>
-    <slider v-if="imgs.length && op.speed && (infos.length === imgs.length)" :imgs="imgs" />
+    <slider v-if="cards.length && op.speed" :cards="cards" :op="op" />
   </keep-alive>
 </template>
 
@@ -15,19 +15,14 @@ export default {
   components: { slider },
   mounted() {},
   computed: {
-    imgs: {
+    cards: {
       get() {
-        return this.$store.state.image.imgs
+        return this.$store.state.card.cards
       },
     },
     op: {
       get() {
-        return this.$store.state.image.op
-      },
-    },
-    infos: {
-      get() {
-        return this.$store.state.item.setInfos
+        return this.$store.state.card.op
       },
     },
   },

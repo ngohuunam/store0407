@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/grid">Grid</router-link> |
       <router-link to="/cart">Cart</router-link> |
       <router-link to="/about">About</router-link>
     </div>
@@ -35,7 +36,7 @@ export default {
   },
   computed: {
     ready() {
-      return this.$store.state.ready && this.$store.state.image.ready && this.$store.state.item.ready
+      return this.$store.state.ready && this.$store.state.card.ready
     },
   },
   watch: {},
@@ -49,8 +50,9 @@ export default {
     },
     init() {
       this.$store.dispatch('init')
-      this.$store.dispatch('image/init')
-      this.$store.dispatch('item/init')
+      // this.$store.dispatch('image/init')
+      // this.$store.dispatch('item/init')
+      this.$store.dispatch('card/init')
     },
   },
 }
@@ -79,7 +81,6 @@ export default {
 .row {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
 }
 .row.center {
@@ -87,5 +88,20 @@ export default {
 }
 .row.right {
   justify-content: flex-end;
+}
+.card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+}
+.card img {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
 }
 </style>

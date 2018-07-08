@@ -53,23 +53,6 @@ export const fetchImgs = ({ commit, state }) => {
   })
 }
 
-// export const fetchImgs = ({ commit, state }) => {
-//   state.rxImgs
-//     .find()
-//     .exec()
-//     .then(rxImgDocs => {
-//       if (rxImgDocs.length) {
-//         rxImgDocs.forEach(doc => {
-//           if (doc.imgs.length) {
-//             const imgName = doc.imgs[0]
-//             const imgAtt = doc.getAttachment(imgName)
-//             imgAtt.getStringData().then(base64 => commit('pushImgObj', { name: doc.name, data: base64 }))
-//           }
-//         })
-//       }
-//     })
-// }
-
 export const init = ({ state, commit, rootState, dispatch }) => {
   if (!state.ready) {
     const rxdb = rootState.rxdb

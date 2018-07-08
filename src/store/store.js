@@ -8,6 +8,7 @@ import * as getters from './getters'
 import * as actions from './actions'
 import image from './image'
 import item from './item'
+import card from './card'
 
 const state = {
   ready: false,
@@ -16,7 +17,7 @@ const state = {
 }
 
 const store = new Vuex.Store({
-  modules: { image, item },
+  modules: { image, item, card },
   state,
   mutations,
   getters,
@@ -24,14 +25,15 @@ const store = new Vuex.Store({
 })
 
 if (module.hot) {
-  module.hot.accept(['./item', './image', './mutations', './getters', './actions'], () => {
+  module.hot.accept(['./card', './item', './image', './mutations', './getters', './actions'], () => {
     const newModuleImage = require('./image').default
     const newModuleItem = require('./item').default
+    const newModuleCard = require('./card').default
     store.hotUpdate({
       mutations: require('./mutations').default,
       getters: require('./getters').default,
       actions: require('./actions').default,
-      modules: { newModuleImage, newModuleItem },
+      modules: { newModuleImage, newModuleItem, newModuleCard },
     })
   })
 }
