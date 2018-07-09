@@ -1,12 +1,12 @@
 <template>
-  <div class="row">
-    <div :style="fontSize()">Size: </div>
-    <div v-for="size in sizes" :key="size" :style="sizeStyle" class="row center">
-      <div :style="fontSize()">{{size}}</div>
-      <div style="display: flex; flex-direction: column; flex-wrap: wrap;">
-        <div v-for="color in colorsBySize(name, size)" :key="color.hex" class="row">
-          <div :style="colorBySizeStyle(color.hex)"></div>
-          <div :style="fontSize(true)">{{color.quantity}}</div>
+  <div class="row container">
+    <div>Size: </div>
+    <div v-for="size in sizes" :key="size" class="row center size">
+      <div>{{size}}</div>
+      <div class="details">
+        <div v-for="color in quantity[size]" :key="color.hex" class="row">
+          <div class="color" :style="`background-color:${color.hex};`"></div>
+          <div class="small-text">{{color.quantity}}</div>
         </div>
       </div>
     </div>
@@ -16,55 +16,80 @@
 <script>
 export default {
   name: 'CardSize',
-  props: ['name'],
+  props: ['sizes', 'quantity'],
   components: {},
-  created() {
-    this.p = this.xs ? 30 : 45
-    this.m = this.xs ? 5 : 10
-    this.s = this.xs ? 10 : 20
-  },
+  created() {},
   mounted() {},
   data() {
     return {}
   },
   watch: {},
   methods: {
-    colorsBySize(name, size) {
-      const colors = this.infos.find(info => info.name === name).quantity[size]
+    colors(size) {
+      const colors = this.quantity[size]
       return colors
     },
-    colorBySizeStyle(hex) {
-      return `background-color:${hex}; width: ${this.p * 0.3}px; height: ${this.p * 0.3}px; margin-left: ${this.m}px; margin-right: ${this.m * 0.6}px`
-    },
-    fontSize(S) {
-      let s = this.xs ? 11 : 20
-      if (S) s = s * 0.7
-      return `font-size:${s}px`
-    },
   },
-  computed: {
-    xs: {
-      get() {
-        return this.$store.state.image.xs
-      },
-    },
-    infos: {
-      get() {
-        return this.$store.state.item.setInfos
-      },
-    },
-    sizes: {
-      get() {
-        return this.infos.find(info => info.name === this.name).sizes
-      },
-    },
-    sizeStyle() {
-      return `font-size:${this.s}px; min-width: ${this.p * 0.8}px; height: ${this.p}px; margin-left:${this.m * 0.7}px; border-radius: 5px; border: 0.7px grey dotted`
-    },
-  },
+  computed: {},
   beforeDestroy() {},
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$w: 45px;
+$ws: $w * 0.66;
+$s: 1.4em;
+$ss: $s * 0.5;
+$sst: $s * 0.4;
+$ssts: $s * 0.5;
+$ml: 8px;
+$mr: $ml * 0.5;
+$wc: $w * 0.3;
+$mls: $ml * 0.6;
+$mrs: $mls * 0.6;
+$wcs: $wc * 0.5;
+
+.container {
+  font-size: $s;
+}
+.size {
+  min-width: $w;
+  height: $w;
+  margin-left: $ml;
+  border-radius: 5px;
+  border: 0.7px grey dotted;
+}
+.color {
+  min-width: $wc;
+  height: $wc;
+  margin-left: $ml;
+  margin-right: $mr;
+}
+.small-text {
+  font-size: $sst;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+@media (max-width: 767px) {
+  .container {
+    font-size: 11px;
+  }
+  .size {
+    min-width: $ws;
+    height: $ws;
+    margin-left: $mls;
+  }
+  .small-text {
+    font-size: $ssts;
+  }
+  .color {
+    min-width: $wcs;
+    height: $wcs;
+    margin-left: $mls;
+    margin-right: $mrs;
+  }
+}
 </style>

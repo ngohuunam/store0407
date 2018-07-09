@@ -28,18 +28,23 @@ const store = new Vuex.Store({
   actions,
 })
 
-// if (module.hot) {
-//   module.hot.accept(['./card', './item', './image', './mutations', './getters', './actions'], () => {
-//     const newModuleImage = require('./image').default
-//     const newModuleItem = require('./item').default
-//     const newModuleCard = require('./card').default
-//     store.hotUpdate({
-//       mutations: require('./mutations').default,
-//       getters: require('./getters').default,
-//       actions: require('./actions').default,
-//       modules: { newModuleImage, newModuleItem, newModuleCard },
-//     })
-//   })
-// }
+if (module.hot) {
+  module.hot.accept(['./card', './mutations', './getters', './actions'], () => {
+    // module.hot.accept(['./card', './item', './image', './mutations', './getters', './actions'], () => {
+    // const newModuleImage = require('./image').default
+    // const newModuleItem = require('./item').default
+    const newModuleCard = require('./card').default
+    store.hotUpdate({
+      mutations: require('./mutations').default,
+      getters: require('./getters').default,
+      actions: require('./actions').default,
+      modules: {
+        // newModuleImage,
+        // newModuleItem,
+        newModuleCard,
+      },
+    })
+  })
+}
 
 export default store

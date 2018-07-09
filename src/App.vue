@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/grid">Grid</router-link> |
+      <router-link to="/">Grid</router-link> |
+      <router-link to="/swiper">Swiper</router-link> |
       <router-link to="/cart">Cart</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <keep-alive v-if="ready" include="home">
+    <keep-alive v-if="ready" include="grid">
+    <!-- <div v-if="ready"> -->
       <router-view />
+    <!-- </div> -->
     </keep-alive>
     <div v-else>
       <img src="https://images.schoolofmotion.com/w950/57723666-611a-4e73-9b84-45d4d9ee4045/Simple_Colors.gif" style="width: 300px;" />
@@ -70,6 +72,11 @@ export default {
   padding: 10px;
 }
 
+@media (max-height: 668px) {
+  #nav {
+    padding: 5px;
+  }
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;
@@ -82,6 +89,9 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
+}
+.row.end {
+  align-items: flex-end;
 }
 .row.center {
   justify-content: center;
@@ -99,9 +109,12 @@ export default {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
   transition: all 0.5s ease-in-out;
 }
+.card.end {
+  align-items: flex-end;
+}
 .card img {
   border-radius: 12px;
-  width: 100%;
-  height: 100%;
+  width: 93%;
+  height: 93%;
 }
 </style>

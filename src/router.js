@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Swiper from './views/Swiper.vue'
 import About from './views/About.vue'
 import Cart from './views/Cart.vue'
 import Grid from './views/Grid.vue'
@@ -11,13 +11,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
-    },
-    {
-      path: '/grid',
       name: 'grid',
       component: Grid,
+    },
+    {
+      path: '/swiper',
+      name: 'swiper',
+      component: Swiper,
     },
     {
       path: '/cart',

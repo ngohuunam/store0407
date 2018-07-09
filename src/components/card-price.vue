@@ -1,11 +1,11 @@
 <template>
-  <div class="row" :style="style()">{{price(name)}}</div>
+  <div class="row price">{{price ? (price + '.000đ') : 'loading...'}}</div>
 </template>
 
 <script>
 export default {
   name: 'CardPrice',
-  props: ['name'],
+  props: ['price'],
   components: {},
   created() {},
   mounted() {},
@@ -13,32 +13,27 @@ export default {
     return {}
   },
   watch: {},
-  methods: {
-    price(name) {
-      return this.infos.find(info => info.name === name).price + '.000đ'
-    },
-    style() {
-      const s = this.xs ? 25 : 45
-      const m = this.xs ? 5 : 0
-      return `font-family: 'Oswald', sans-serif;font-size:${s}px;margin-bottom:${m}px;`
-    },
-  },
-  computed: {
-    xs: {
-      get() {
-        return this.$store.state.image.xs
-      },
-    },
-    infos: {
-      get() {
-        return this.$store.state.item.setInfos
-      },
-    },
-  },
+  methods: {},
+  computed: {},
   beforeDestroy() {},
 }
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Oswald:700');
+.price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 45px;
+  text-shadow: 1px 1px #fff, -1px 1px #fff, 1px -1px #fff, -1px -1px #fff, 1px 1px 5px #555;
+}
+@media (max-width: 576px) {
+  .price {
+    font-size: 30px;
+  }
+}
+@media (max-width: 321px) {
+  .price {
+    font-size: 20px;
+  }
+}
 </style>

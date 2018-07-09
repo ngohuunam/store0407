@@ -30,12 +30,12 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 1380px;
+  max-width: 1250px;
   margin: auto;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
-  background-color: white;
+  /* background-color: white; */
 }
 </style>

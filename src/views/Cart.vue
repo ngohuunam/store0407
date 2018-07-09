@@ -1,23 +1,23 @@
 <template>
   <!-- <keep-alive> -->
-    <slider v-if="cart.length" :imgs="cart" :isCart="true" />
+    <swipeer v-if="cart && cart.length" :imgs="cart" :isCart="true" />
   <!-- </keep-alive> -->
 </template>
 
 <script>
-import slider from '../components/slider.vue'
+import swiper from '../components/swiper.vue'
 
 export default {
   name: 'cart',
   data() {
     return {}
   },
-  components: { slider },
+  components: { swiper },
   mounted() {},
   computed: {
     cart: {
       get() {
-        return this.$store.state.image.cart
+        return this.$store.state.card.cart
       },
     },
   },

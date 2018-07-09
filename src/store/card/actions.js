@@ -26,8 +26,8 @@ export const init = ({ state, commit, rootState, dispatch }) => {
 export const subsItem = ({ commit, state, dispatch }) => {
   const item$ = state.rxItem.$.pipe(filter(x => x != null)).subscribe(change => {
     console.log('item$ change: ', change)
-    const zet = change.data.v.zet
-    dispatch('fetchOne', zet)
+    const setName = change.data.v.zet
+    dispatch('fetchInfo', setName)
   })
   // console.log('item$: ', item$)
   commit('subsItem', item$)
@@ -44,7 +44,7 @@ export const subsImg = ({ commit, state, dispatch }) => {
         commit('pushImgObj', { name: name, data: loading, picked: false, info: {} })
         break
       case 'UPDATE':
-        dispatch('updateImg', data)
+        dispatch('fetchImg', data)
         break
       case 'DELETE':
         commit('spliceCard', name)
@@ -54,55 +54,38 @@ export const subsImg = ({ commit, state, dispatch }) => {
   commit('subsImg', img$)
 }
 
-export const updateImg = ({ commit, state }, data) => {
-  const name = data.doc
-  const attName = data.v.imgs.length ? data.v.imgs[0] : ''
-  if (attName) {
-    state.rxImage
-      .findOne(name)
-      .exec()
-      .then(rxDoc => {
-        const rxAtt = rxDoc.getAttachment(attName)
-        rxAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, data: base64, picked: false, info: {} }))
-      })
-  } else commit('pushImgObj', { name: name, data: loading, picked: false, info: {} })
-}
-
-export const fetchCards = ({ commit, state }) => {
+export const fetchCards = ({ state, dispatch }) => {
   state.list.value.forEach(setName => {
-    state.rxItem
-      .find({ $and: [{ zet: { $eq: setName } }, { quantity: { $gt: 0 } }] })
-      .exec()
-      .then(rxItemDocs => {
-        // console.log(rxDocs)
-        const info = fetchData(rxItemDocs)
-        const infoObj = { name: setName, base64: loading, picked: false, info: info }
-        commit('pushInfoObj', infoObj)
-      })
-    state.rxImage
-      .findOne(setName)
-      .exec()
-      .then(rxImageDoc => {
-        if (rxImageDoc && rxImageDoc.imgs.length) {
-          const imgName = rxImageDoc.imgs[0]
-          const imgAtt = rxImageDoc.getAttachment(imgName)
-          imgAtt.getStringData().then(base64 => commit('pushImgObj', { name: setName, base64: base64, picked: false, info: {} }))
-        }
-      })
+    dispatch('fetchInfo', setName)
+    // dispatch('fetchImg', setName)
   })
 }
 
-export const fetchOne = ({ commit, state }, _zet) => {
+export const fetchImg = ({ commit, state }, setName) => {
+  state.rxImage
+    .findOne(setName)
+    .exec()
+    .then(rxImageDoc => {
+      const rxImageAtts = rxImageDoc.allAttachments()
+      if (rxImageAtts.length) {
+        // rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, base64: base64, picked: false, info: {} })))
+        rxImageAtts[0].getStringData().then(base64 => commit('pushImgObj', { name: setName, base64: base64, picked: false, info: {} }))
+      } else commit('pushImgObj', { name: setName, base64: loading, picked: false, info: {} })
+    })
+}
+
+export const fetchInfo = ({ commit, state }, setName) => {
   const rxItem = state.rxItem
   rxItem
-    .find({ $and: [{ zet: { $eq: _zet } }, { quantity: { $gt: 0 } }] })
+    .find({ $and: [{ zet: { $eq: setName } }, { quantity: { $gt: 0 } }] })
     .exec()
-    .then(rxDocs => {
+    .then(rxItemDocs => {
       // console.log(rxDocs)
-      if (rxDocs && rxDocs.length) {
-        const infoObj = fetchData(rxDocs)
-        commit('pushSetInfo', infoObj)
-      } else commit('spliceCard', _zet)
+      if (rxItemDocs && rxItemDocs.length) {
+        const info = fetchData(rxItemDocs)
+        const infoObj = { name: setName, base64: loading, picked: false, info: info }
+        commit('pushInfoObj', infoObj)
+      } else commit('spliceCard', setName)
     })
 }
 
