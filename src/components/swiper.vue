@@ -20,7 +20,7 @@ export default {
   props: ['cards', 'isCart', 'op'],
   components: { 'card-simple': cardSimple },
   created() {
-    this.xs = window.innerWidth < 768
+    this.xs = window.innerWidth < 1024
   },
   mounted() {
     if (!this.xs) this.class_ = 'swiper-slide'
@@ -57,19 +57,21 @@ export default {
   transform: scale(1.5);
 }
 
-/* .swiper-slide-xs {
+.swiper-slide-xs {
   margin: 130px 0px 140px 0px;
-} */
+}
 
 .swiper-slide {
   margin: 10px 0px 30px 0px;
 }
-@media (max-width: 767px) {
-  .swiper-slide-xs {
-    margin: 110px 0px 119px 0px;
-  }
+@media (max-width: 1025px) {
   .swiper-slide-active {
     transform: scale(1.5);
+  }
+}
+@media (min-height: 769px) and (max-height: 1025px) {
+  .swiper-slide-xs {
+    margin: 160px 0px 160px 0px;
   }
 }
 @media (min-height: 570px) and (max-height: 641px) {

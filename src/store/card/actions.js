@@ -57,7 +57,7 @@ export const subsImg = ({ commit, state, dispatch }) => {
 export const fetchCards = ({ state, dispatch }) => {
   state.list.value.forEach(setName => {
     dispatch('fetchInfo', setName)
-    // dispatch('fetchImg', setName)
+    dispatch('fetchImg', setName)
   })
 }
 

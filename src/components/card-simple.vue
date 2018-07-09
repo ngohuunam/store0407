@@ -1,15 +1,15 @@
 <template>
-  <div class="card" :style="cardStyle">
+  <div class="card" style="padding: 1.5% 0px">
     <div class="row end" :style="_imgStyle(card.base64)">
       <!-- <img :src="card.base64" /> -->
       <div>
-        <card-price :price="card.info.price" />
-        <card-color v-if="ip4" :hexs="card.info.hexs" />
+        <card-price v-if="ratio < 1.779" :price="card.info.price" />
+        <card-color v-if="ratio < 1.51" :hexs="card.info.hexs" />
       </div>
     </div>
     <div style="width: 93%">
-      <!-- <card-price v-if="!ip4" :price="card.info.price" /> -->
-      <card-color v-if="!ip4" :hexs="card.info.hexs" />
+      <card-price v-if="ratio > 1.78" :price="card.info.price" />
+      <card-color v-if="ratio > 1.5" :hexs="card.info.hexs" />
       <card-size :sizes="card.info.sizes" :quantity="card.info.quantity" />
     </div>
   </div>
@@ -24,7 +24,9 @@ export default {
   name: 'Card',
   props: ['card', 'isSlider'],
   components: { 'card-color': cardColor, 'card-price': cardPrice, 'card-size': cardSize },
-  created() {},
+  created() {
+    console.log(this.ratio)
+  },
   mounted() {},
   data() {
     return {}
@@ -36,14 +38,9 @@ export default {
     },
   },
   computed: {
-    ip4: {
+    ratio: {
       get() {
-        return this.$store.state.card.ip4
-      },
-    },
-    cardStyle: {
-      get() {
-        return this.$store.state.card.cardStyle
+        return this.$store.state.card.ratio
       },
     },
     imgStyle: {

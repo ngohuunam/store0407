@@ -77,6 +77,11 @@ export default {
     padding: 5px;
   }
 }
+@media (min-height: 769px) and (max-height: 1025px) {
+  #nav {
+    padding: 20px;
+  }
+}
 #nav a {
   font-weight: bold;
   color: #2c3e50;

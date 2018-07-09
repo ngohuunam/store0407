@@ -8,10 +8,8 @@ export const fetchList = (state, rxSetListDoc) => {
 export const createStyle = state => {
   const vw = window.innerWidth
   const vh = window.innerHeight
-  // const ratioH = vh / vw
-  state.ip4 = vw < 321 && vh < 481
-  console.log('vw', vw)
-  console.log('vh', vh)
+  state.ratio = vh / vw
+  // state.ip4 = vw < 321 && vh < 481
   // const rvh = vh/2
   // const ip5 = vw < 321 && vh > 480 && vh < 568
   // const ip6 = vw === 375 && vh === 667
@@ -22,21 +20,19 @@ export const createStyle = state => {
   // const xxs = width < 321
   const xs = vw < 768
   const md = vw > 767 && vw < 1024
-  // const lg = vw > 1023 && vw < 1221
+  const lg = vw > 1220
   const maxWidth = 400
   // const ratioW = lg ? 0.47 : 0.47
-  const ratioW = 0.94
+  const ratioW = md ? 0.8 : 0.94
   const scale = 1.5
-  const CARD_WIDTH = xs ? vw * ratioW : maxWidth
+  const CARD_WIDTH = xs || md ? vw * ratioW : maxWidth
   const CARD_WIDTH_REAL = CARD_WIDTH / scale
-  console.log(CARD_WIDTH_REAL)
   // const CARD_HEIGHT = CARD_WIDTH_REAL * ratioH
   const PAD = CARD_WIDTH * 0.015
   const IMG_WIDTH = CARD_WIDTH_REAL * ratioW - PAD
   const IMG_HEIGHT = (IMG_WIDTH * 4) / 3
-  state.op = op(xs, md)
+  state.op = op(lg)
   state.imgStyle = `width: ${IMG_WIDTH}px; height: ${IMG_HEIGHT}px; margin: 0px ${PAD}px;`
-  state.cardStyle = `padding: ${PAD}px 0px; margin-bottom:${PAD}px;`
 }
 
 export const init = (state, rxdb) => {
@@ -80,9 +76,9 @@ export const subsItem = (state, item$) => {
   state.item$ = item$
 }
 
-const op = (xs, md) => {
-  const activeClass = `swiper-slide-active${xs ? '-xs' : ''}`
-  const slideClass = `swiper-slide${xs ? '-xs' : ''}`
+const op = lg => {
+  const activeClass = `swiper-slide-active${lg ? '' : '-xs'}`
+  const slideClass = `swiper-slide${lg ? '' : '-xs'}`
   let options = {
     slideClass: slideClass,
     slideActiveClass: activeClass,
@@ -91,15 +87,14 @@ const op = (xs, md) => {
     centeredSlides: true,
     speed: 1000,
   }
-  if (!xs) {
-    const _slidesPerView = md ? 2 : 3
+  if (lg) {
     const opNotXs = {
       // grabCursor: true,
       // slidesOffsetBefore: 10,
       // slidesOffsetAfter: 10,
-      slidesPerView: _slidesPerView,
+      slidesPerView: 3,
       spaceBetween: 10,
-      slidesPerGroup: _slidesPerView,
+      slidesPerGroup: 3,
       loop: true,
       // loopFillGroupWithBlank: true,
       centeredSlides: false,
