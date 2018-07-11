@@ -9,52 +9,37 @@
 export default {
   name: 'CardColor',
   props: ['hexs'],
-  components: {},
-  created() {},
-  mounted() {},
-  data() {
-    return {}
-  },
-  watch: {},
-  methods: {},
-  computed: {},
-  beforeDestroy() {},
 }
 </script>
 
-<style scoped lang="scss">
-$s: 1.4em;
-$ss: $s * 0.5;
-
+<style scoped>
 .container {
-  font-size: $s;
-  margin-bottom: 10px;
-  height: 40px;
+  margin-bottom: 1%;
 }
 .hex {
-  width: 40px;
-  height: 100%;
-  margin-left: 3%;
-  border-radius: 5px;
+  width: 10%;
+  height: 15px;
+  margin-left: 1%;
+  /* border-radius: 50%; */
 }
-@media (max-width: 767px) {
-  .container {
-    font-size: $ss;
+@media (min-width: 375px) {
+  .hex {
     height: 20px;
-    margin-bottom: 6px;
-  }
-  .hex {
-    width: 20px;
   }
 }
-@media (max-width: 321px) {
-  .container {
-    font-size: 11px;
-    height: 16px;
-    margin-bottom: 3px;
-  }
+@media (min-width: 768px) {
   .hex {
-    width: 16px;
+    height: 35px;
+  }
+}
+@media (min-width: 1024px) {
+  .hex {
+    height: 45px;
+  }
+}
+@media (min-width: 1025px) {
+  .hex {
+    height: 60px;
   }
 }
 </style>

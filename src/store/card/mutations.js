@@ -6,33 +6,7 @@ export const fetchList = (state, rxSetListDoc) => {
 }
 
 export const createStyle = state => {
-  const vw = window.innerWidth
-  const vh = window.innerHeight
-  state.ratio = vh / vw
-  // state.ip4 = vw < 321 && vh < 481
-  // const rvh = vh/2
-  // const ip5 = vw < 321 && vh > 480 && vh < 568
-  // const ip6 = vw === 375 && vh === 667
-  // const ip6p = vw === 414 && vh === 736
-  // const ipx = vw === 375 && vh === 812
-  // const ipad = vw === 768 && vh === 1024
-  // const ipadp = vw === 1024 && vh === 1366
-  // const xxs = width < 321
-  const xs = vw < 768
-  const md = vw > 767 && vw < 1024
-  const lg = vw > 1220
-  const maxWidth = 400
-  // const ratioW = lg ? 0.47 : 0.47
-  const ratioW = md ? 0.8 : 0.94
-  const scale = 1.5
-  const CARD_WIDTH = xs || md ? vw * ratioW : maxWidth
-  const CARD_WIDTH_REAL = CARD_WIDTH / scale
-  // const CARD_HEIGHT = CARD_WIDTH_REAL * ratioH
-  const PAD = CARD_WIDTH * 0.015
-  const IMG_WIDTH = CARD_WIDTH_REAL * ratioW - PAD
-  const IMG_HEIGHT = (IMG_WIDTH * 4) / 3
-  state.op = op(lg)
-  state.imgStyle = `width: ${IMG_WIDTH}px; height: ${IMG_HEIGHT}px; margin: 0px ${PAD}px;`
+  state.op = op(false)
 }
 
 export const init = (state, rxdb) => {

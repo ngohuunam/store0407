@@ -1,36 +1,51 @@
 <template>
-  <div class="swiper-container">
+  <div class="swiper-container" :style="`height:${swiperH}px;`">
     <div class="swiper-wrapper">
-      <card-simple :class="class_" v-for="card in cards" :key="card.name" :card="card" :isSlider="true" />
+      <card-simple ref="card" class="swiper-slide" v-for="card in cards" :key="card.name" :card="card" />
     </div>
     <div v-if="!xs" class="swiper-button-prev" slot="button-prev"></div>
     <div v-if="!xs" class="swiper-button-next" slot="button-next"></div>
-    <div v-if="!xs" class="swiper-pagination" slot="pagination"></div>
   </div>
 </template>
 
 <script>
-import { Swiper, Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/dist/js/swiper.esm.js'
-Swiper.use([Navigation, Pagination, Keyboard, Mousewheel])
+import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm.js'
+Swiper.use([Navigation])
 import 'swiper/dist/css/swiper.min.css'
 import cardSimple from '@/components/card-simple.vue'
 
 export default {
   name: 'slider',
-  props: ['cards', 'isCart', 'op'],
+  props: ['cards'],
   components: { 'card-simple': cardSimple },
   created() {
-    this.xs = window.innerWidth < 1024
+    this.xs = window.innerWidth < 768
+    this.xl = window.innerWidth > 1024
   },
   mounted() {
-    if (!this.xs) this.class_ = 'swiper-slide'
     this.$nextTick(() => {
-      this.swiper = new Swiper('.swiper-container', this.op)
+      this.height = this.$refs.card[0].$el.clientHeight
+      this.space = window.innerWidth * (this.xl ? 0.09 : 0.25)
+      console.log(this.space)
+      // this.swiperH = this.height * (this.xl ? 1.15 : 2.15)
+      this.swiperH = this.height * 2.15
+      const op = {
+        slidesPerView: 'auto',
+        spaceBetween: this.space,
+        centeredSlides: true,
+        speed: 1000,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      }
+      this.swiper = new Swiper('.swiper-container', op)
+      // console.log(this.swiper)
     })
   },
   data() {
     return {
-      class_: 'swiper-slide-xs',
+      swiperH: 0,
     }
   },
   watch: {},
@@ -51,42 +66,18 @@ export default {
 <style scoped>
 .swiper-container {
   max-width: 1220px;
+  display: flex;
+  align-items: center;
 }
-.swiper-slide-active-xs {
+.swiper-wrapper {
+  height: auto;
+}
+.swiper-slide-prev,
+.swiper-slide-active,
+.swiper-slide-next {
   transition: all 0.5s ease-in-out;
-  transform: scale(1.5);
 }
-
-.swiper-slide-xs {
-  margin: 130px 0px 140px 0px;
-}
-
-.swiper-slide {
-  margin: 10px 0px 30px 0px;
-}
-@media (max-width: 1025px) {
-  .swiper-slide-active {
-    transform: scale(1.5);
-  }
-}
-@media (min-height: 769px) and (max-height: 1025px) {
-  .swiper-slide-xs {
-    margin: 160px 0px 160px 0px;
-  }
-}
-@media (min-height: 570px) and (max-height: 641px) {
-  .swiper-slide-xs {
-    margin: 101px 0px 110px 0px;
-  }
-}
-@media (min-height: 482px) and (max-height: 569px) {
-  .swiper-slide-xs {
-    margin: 91px 0px 100px 0px;
-  }
-}
-@media (max-height: 481px) {
-  .swiper-slide-xs {
-    margin: 76px 0px 85px 0px;
-  }
+.swiper-slide-active {
+  transform: scale(2);
 }
 </style>

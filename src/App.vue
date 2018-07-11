@@ -7,9 +7,9 @@
       <router-link to="/about">About</router-link>
     </div>
     <keep-alive v-if="ready" include="grid">
-    <!-- <div v-if="ready"> -->
+      <!-- <div v-if="ready"> -->
       <router-view />
-    <!-- </div> -->
+      <!-- </div> -->
     </keep-alive>
     <div v-else>
       <img src="https://images.schoolofmotion.com/w950/57723666-611a-4e73-9b84-45d4d9ee4045/Simple_Colors.gif" style="width: 300px;" />
@@ -69,18 +69,14 @@ export default {
   color: #2c3e50;
 }
 #nav {
-  padding: 10px;
-}
-
-@media (max-height: 668px) {
-  #nav {
-    padding: 5px;
-  }
-}
-@media (min-height: 769px) and (max-height: 1025px) {
-  #nav {
-    padding: 20px;
-  }
+  height: 3%;
+  display: flex;
+  margin: 1% auto;
+  max-width: 1220px;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  /* font-size: 5vw; */
 }
 #nav a {
   font-weight: bold;
@@ -104,22 +100,18 @@ export default {
 .row.right {
   justify-content: flex-end;
 }
-.card {
-  display: flex;
+.row.left {
   justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-  transition: all 0.5s ease-in-out;
+}
+.row.m-b {
+  margin-bottom: 1%;
 }
 .card.end {
   align-items: flex-end;
 }
-.card img {
+/* .card img {
   border-radius: 12px;
   width: 93%;
   height: 93%;
-}
+} */
 </style>

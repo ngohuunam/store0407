@@ -1,95 +1,69 @@
 <template>
-  <div class="row container">
-    <div>Size: </div>
+  <!-- <div class="row container"> -->
+    <div class="row m-b">Size: {{sizes ? sizes.join(' | ') : ''}}</div>
+    <!-- <div>Size: </div>
     <div v-for="size in sizes" :key="size" class="row center size">
-      <div>{{size}}</div>
+      <div>
+        <span>{{size}}</span>
+      </div>
       <div class="details">
         <div v-for="color in quantity[size]" :key="color.hex" class="row">
           <div class="color" :style="`background-color:${color.hex};`"></div>
-          <div class="small-text">{{color.quantity}}</div>
+          <div class="quantity">{{color.quantity}}</div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
 </template>
 
 <script>
 export default {
   name: 'CardSize',
   props: ['sizes', 'quantity'],
-  components: {},
-  created() {},
-  mounted() {},
-  data() {
-    return {}
-  },
-  watch: {},
-  methods: {
-    colors(size) {
-      const colors = this.quantity[size]
-      return colors
-    },
-  },
-  computed: {},
-  beforeDestroy() {},
 }
 </script>
 
-<style scoped lang="scss">
-$w: 45px;
-$ws: $w * 0.66;
-$s: 1.4em;
-$ss: $s * 0.5;
-$sst: $s * 0.4;
-$ssts: $s * 0.5;
-$ml: 8px;
-$mr: $ml * 0.5;
-$wc: $w * 0.3;
-$mls: $ml * 0.6;
-$mrs: $mls * 0.6;
-$wcs: $wc * 0.5;
-
+<style scoped>
 .container {
-  font-size: $s;
+  /* font-size: 3vw; */
+  /* margin-top: 1vw; */
 }
 .size {
-  min-width: $w;
-  height: $w;
-  margin-left: $ml;
-  border-radius: 5px;
-  border: 0.7px grey dotted;
+  min-width: 4vw;
+  height: 7vw;
+  margin-left: 0.5vw;
+  border-radius: 0.5vw;
+  border: 0.2vw grey dotted;
+  justify-content: flex-end;
+}
+.size > div {
+  width: 100%;
 }
 .color {
-  min-width: $wc;
-  height: $wc;
-  margin-left: $ml;
-  margin-right: $mr;
+  min-width: 2vw;
+  height: 2vw;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
 }
-.small-text {
-  font-size: $sst;
+.quantity {
+  font-size: 0.5em;
 }
 .details {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: row; */
   flex-wrap: wrap;
 }
-@media (max-width: 767px) {
-  .container {
-    font-size: 11px;
-  }
+@media (min-width: 768px) {
   .size {
-    min-width: $ws;
-    height: $ws;
-    margin-left: $mls;
-  }
-  .small-text {
-    font-size: $ssts;
+    min-width: 3vw;
+    height: 5vw;
   }
   .color {
-    min-width: $wcs;
-    height: $wcs;
-    margin-left: $mls;
-    margin-right: $mrs;
+    min-width: 1.5vw;
+    height: 1.5vw;
+  }
+  .quantity {
+    /* font-size: 1.5vw; */
   }
 }
 </style>

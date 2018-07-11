@@ -6,16 +6,6 @@
 export default {
   name: 'CardPrice',
   props: ['price'],
-  components: {},
-  created() {},
-  mounted() {},
-  data() {
-    return {}
-  },
-  watch: {},
-  methods: {},
-  computed: {},
-  beforeDestroy() {},
 }
 </script>
 
@@ -23,17 +13,17 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Oswald:700');
 .price {
   font-family: 'Oswald', sans-serif;
-  font-size: 45px;
-  text-shadow: 1px 1px #fff, -1px 1px #fff, 1px -1px #fff, -1px -1px #fff, 1px 1px 5px #555;
+  font-size: 1.5em;
+  text-shadow: 0.1vw 0.1vw #fff, -0.1vw 0.1vw #fff, 0.1vw -0.1vw #fff, -0.1vw -0.1vw #fff, 0.1vw 0.1vw 0.6vw #555;
 }
-@media (max-width: 576px) {
+@media (min-width: 768px) {
   .price {
-    font-size: 30px;
+    font-size: 2em;
   }
 }
-@media (max-width: 321px) {
+/* @media (min-width: 1025px) {
   .price {
-    font-size: 20px;
+    font-size: 1.5em;
   }
-}
+} */
 </style>

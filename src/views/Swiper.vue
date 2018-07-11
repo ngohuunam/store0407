@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <swiper v-if="cards.length && op.speed" :cards="cards" :op="op" />
+    <swiper v-if="cards.length" :cards="cards" />
   </div>
 </template>
 
@@ -20,21 +20,13 @@ export default {
         return this.$store.state.card.cards
       },
     },
-    op: {
-      get() {
-        return this.$store.state.card.op
-      },
-    },
   },
 }
 </script>
 <style scoped>
-/* .container {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.container {
+  /* height: 100vh;
   display: flex;
-  align-items: flex-start;
-} */
+  align-items: center; */
+}
 </style>
