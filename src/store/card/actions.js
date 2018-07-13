@@ -92,7 +92,7 @@ export const fetchInfo = ({ commit, state }, setName) => {
 }
 
 const fetchData = rxDocs => {
-  const _res = { name: '', hexs: [], sizes: [], price: 0, disc: 0, quantity: {}, info: [] }
+  const _res = { name: '', item: '', hexs: [], sizes: [], price: 0, disc: 0, quantity: {}, info: [] }
   const infoObj = rxDocs.reduce((res, rxDoc) => {
     res.name = rxDoc.zet
     res.info = rxDoc.info
@@ -106,12 +106,14 @@ const fetchData = rxDocs => {
     res.quantity[rxDoc.color][rxDoc.size].price = rxDoc.price
     res.quantity[rxDoc.color][rxDoc.size].discount = rxDoc.disc
     res.quantity[rxDoc.color][rxDoc.size].hex = rxDoc.hex
+    res.quantity[rxDoc.color][rxDoc.size].item = rxDoc.name
     if (!res.quantity[rxDoc.size]) res.quantity[rxDoc.size] = {}
     if (!res.quantity[rxDoc.size][rxDoc.color]) res.quantity[rxDoc.size][rxDoc.color] = {}
     res.quantity[rxDoc.size][rxDoc.color].quantity = rxDoc.quantity
     res.quantity[rxDoc.size][rxDoc.color].price = rxDoc.price
     res.quantity[rxDoc.size][rxDoc.color].discount = rxDoc.disc
     res.quantity[rxDoc.size][rxDoc.color].hex = rxDoc.hex
+    res.quantity[rxDoc.size][rxDoc.color].item = rxDoc.name
     return res
   }, _res)
   // console.log('infoObj: ', infoObj)

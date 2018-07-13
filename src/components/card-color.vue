@@ -12,13 +12,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .color {
   margin-bottom: 1%;
 }
 .hex {
   padding: 5%;
   margin-left: 1%;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 </style>

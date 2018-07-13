@@ -1,9 +1,9 @@
 <template>
   <div class="modal-mask">
-    <a href="#" class="close button left" @click="closeModal"></a>
-    <a href="#" class="close button right" @click="closeModal"></a>
-    <a href="#" class="add button left" @click="toCart"></a>
-    <a href="#" class="add button right" @click="toCart"></a>
+    <a href="#" class="close bttn left" @click="closeModal"></a>
+    <a href="#" class="close bttn right" @click="closeModal"></a>
+    <a href="#" class="add bttn left" @click="toCart"></a>
+    <a href="#" class="add bttn right" @click="toCart"></a>
     <swiper :cards="modal" :isModal="isModal" ref="swiper" />
   </div>
 </template>
@@ -50,39 +50,39 @@ export default {
   align-items: center;
   transition: opacity 0.3s ease;
 }
-.button {
+.bttn {
   position: fixed;
   width: 10%;
   height: 10%;
   opacity: 0.2;
   z-index: 3;
 }
-.button.add {
+.bttn.add {
   top: 45%;
 }
-.button.close {
+.bttn.close {
   top: 35%;
 }
-.button.right {
+.bttn.right {
   right: 3%;
 }
-.button.left {
+.bttn.left {
   left: 3%;
 }
-.button.center {
+.bttn.center {
   left: 45%;
 }
-.button:hover {
+.bttn.close:hover {
   opacity: 1;
 }
-.button.close:hover:before {
+.bttn.close:hover:before {
   transform: rotate(90deg);
 }
-.button.close:hover:after {
+.bttn.close:hover:after {
   transform: rotate(-90deg);
 }
-.button:before,
-.button:after {
+.bttn:before,
+.bttn:after {
   position: absolute;
   content: ' ';
   height: 60%;
@@ -91,16 +91,16 @@ export default {
   background-color: #333;
   transition: all 0.2s ease-out;
 }
-.button.close:before {
+.bttn.close:before {
   transform: rotate(45deg);
 }
-.button.close:after {
+.bttn.close:after {
   transform: rotate(-45deg);
 }
-.button.add:before {
+.bttn.add:before {
   transform: rotate(0deg);
 }
-.button.add:after {
+.bttn.add:after {
   transform: rotate(90deg);
 }
 </style>

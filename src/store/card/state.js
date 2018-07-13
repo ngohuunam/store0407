@@ -7,4 +7,5 @@ export default {
   img$: null,
   item$: null,
   ready: false,
+  cart: [],
 }

@@ -18,9 +18,10 @@ export const toModal = (state, cardObj) => {
       hexs = [sizeObjs[key].hex]
       const quantity = sizeObjs[key].quantity
       const _size = `Size ${size}: ${price}.000đ, SL: ${quantity}`
-      sizes.push(_size)
+      sizes.push({ inf: _size, z: cardObj.name, id: _id, s: size, p: price, c: color, q: 1, h: sizeObjs[key].hex })
     }
     return {
+      zet: cardObj.name,
       name: _id,
       base64: base64,
       info: {

@@ -52,15 +52,15 @@ export default {
   align-items: center;
   flex-direction: column;
   background-color: white;
-  border-radius: 1vw;
-  box-shadow: 0.3vw 0.3vw 1.5vw rgba(0, 0, 0, 0.2);
+  border-radius: 0.3vw;
+  box-shadow: 0.1vw 0.1vw 0.5vw rgba(0, 0, 0, 0.3);
   margin-bottom: 1vw;
 }
 .card > .card-img {
   display: flex;
   justify-content: center;
   background-size: 100% 100%;
-  border-radius: 1vw;
+  border-radius: 0.3vw;
 }
 .card-info {
   width: 96%;

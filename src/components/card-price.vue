@@ -14,6 +14,6 @@ export default {
 .price {
   font-family: 'Oswald', sans-serif;
   font-size: 1.5em;
-  text-shadow: 0.1vw 0.1vw #fff, -0.1vw 0.1vw #fff, 0.1vw -0.1vw #fff, -0.1vw -0.1vw #fff, 0.1vw 0.1vw 0.6vw #555;
+  text-shadow: 0.07vw 0.07vw #fff, -0.07vw 0.07vw #fff, 0.07vw -0.07vw #fff, -0.07vw -0.07vw #fff, 0.07vw 0.07vw 0.3vw #555;
 }
 </style>
