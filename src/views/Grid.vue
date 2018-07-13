@@ -1,26 +1,44 @@
 <template>
-  <div v-if="cards.length" class="container">
-    <card-simple v-for="card in cards" :key="card.name" :card="card" />
+  <div>
+    <div v-if="cards.length" class="container">
+      <card-simple class="m" v-for="(card, i) in cards" :key="card.name" :bgImg="bgImg(i)" :info="card.info" @click.native="toModal(card)" />
+    </div>
+    <modal v-if="modal.length" :modal="modal" />
   </div>
 </template>
 
 <script>
 import cardSimple from '@/components/card-simple.vue'
+import swiper from '@/components/swiper.vue'
+import modal from '@/components/modal.vue'
+import loading from '@/assets/loading.jpg'
 
 export default {
   name: 'Grid',
-  components: { 'card-simple': cardSimple },
+  components: { 'card-simple': cardSimple, swiper, modal },
   created() {},
   mounted() {},
   data() {
     return {}
   },
   watch: {},
-  methods: {},
+  methods: {
+    toModal(card) {
+      this.$store.commit('card/toModal', card)
+    },
+    bgImg(i) {
+      return this.cards[i].base64[0] || loading
+    },
+  },
   computed: {
     cards: {
       get() {
         return this.$store.state.card.cards
+      },
+    },
+    modal: {
+      get() {
+        return this.$store.state.card.modal
       },
     },
   },
@@ -30,12 +48,14 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 1600px;
+  max-width: 1024px;
   margin: auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-  /* background-color: white; */
+}
+.m {
+  margin: 1%;
 }
 </style>

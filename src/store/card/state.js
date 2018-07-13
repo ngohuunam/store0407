@@ -1,5 +1,6 @@
 export default {
   cards: [],
+  modal: [],
   list: [],
   rxItem: {},
   rxImage: {},

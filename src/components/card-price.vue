@@ -16,14 +16,4 @@ export default {
   font-size: 1.5em;
   text-shadow: 0.1vw 0.1vw #fff, -0.1vw 0.1vw #fff, 0.1vw -0.1vw #fff, -0.1vw -0.1vw #fff, 0.1vw 0.1vw 0.6vw #555;
 }
-@media (min-width: 768px) {
-  .price {
-    font-size: 2em;
-  }
-}
-/* @media (min-width: 1025px) {
-  .price {
-    font-size: 1.5em;
-  }
-} */
 </style>

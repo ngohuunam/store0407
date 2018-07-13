@@ -48,7 +48,7 @@ export default {
         if (!this.ready) {
           this.init()
         }
-      }, 1000)
+      }, 200)
     },
     init() {
       this.$store.dispatch('init')
@@ -62,6 +62,8 @@ export default {
 
 <style>
 #app {
+  max-width: 1024px;
+  margin: 0 auto;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,7 +74,7 @@ export default {
   height: 3%;
   display: flex;
   margin: 1% auto;
-  max-width: 1220px;
+  max-width: 100%;
   justify-content: space-around;
   align-items: center;
   z-index: 10;

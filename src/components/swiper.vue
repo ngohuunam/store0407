@@ -1,7 +1,7 @@
 <template>
   <div class="swiper-container" :style="`height:${swiperH}px;`">
     <div class="swiper-wrapper">
-      <card-simple ref="card" class="swiper-slide" v-for="card in cards" :key="card.name" :card="card" />
+      <card-simple ref="card" class="swiper-slide" v-for="(card, i) in cards" :key="card.name" :isModal="isModal" :info="card.info" :bgImg="bgImg(i)" />
     </div>
     <div v-if="!xs" class="swiper-button-prev" slot="button-prev"></div>
     <div v-if="!xs" class="swiper-button-next" slot="button-next"></div>
@@ -13,10 +13,11 @@ import { Swiper, Navigation } from 'swiper/dist/js/swiper.esm.js'
 Swiper.use([Navigation])
 import 'swiper/dist/css/swiper.min.css'
 import cardSimple from '@/components/card-simple.vue'
+import loading from '@/assets/loading.jpg'
 
 export default {
   name: 'slider',
-  props: ['cards'],
+  props: ['cards', 'isModal'],
   components: { 'card-simple': cardSimple },
   created() {
     this.xs = window.innerWidth < 768
@@ -25,9 +26,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.height = this.$refs.card[0].$el.clientHeight
-      this.space = window.innerWidth * (this.xl ? 0.09 : 0.25)
-      console.log(this.space)
-      // this.swiperH = this.height * (this.xl ? 1.15 : 2.15)
+      this.space = this.xl ? 180 : window.innerWidth * 0.245
       this.swiperH = this.height * 2.15
       const op = {
         slidesPerView: 'auto',
@@ -40,7 +39,6 @@ export default {
         },
       }
       this.swiper = new Swiper('.swiper-container', op)
-      // console.log(this.swiper)
     })
   },
   data() {
@@ -50,10 +48,8 @@ export default {
   },
   watch: {},
   methods: {
-    pushCart(imgObj, i) {
-      imgObj.picked = !imgObj.picked
-      if (imgObj.picked) this.$store.commit('image/pushCart', i)
-      else this.$store.commit('image/spliceCart', imgObj.name)
+    bgImg(i) {
+      return this.cards[i].base64[0] || loading
     },
   },
   computed: {},
@@ -65,7 +61,8 @@ export default {
 
 <style scoped>
 .swiper-container {
-  max-width: 1220px;
+  max-width: 1024px;
+  width: 100%;
   display: flex;
   align-items: center;
 }

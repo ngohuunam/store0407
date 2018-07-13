@@ -1,11 +1,9 @@
 <template>
-  <div class="container">
-    <swiper v-if="cards.length" :cards="cards" />
-  </div>
+  <swiper v-if="cards.length" :cards="cards" />
 </template>
 
 <script>
-import swiper from '../components/swiper.vue'
+import swiper from '@/components/swiper.vue'
 
 export default {
   name: 'home',
@@ -24,9 +22,4 @@ export default {
 }
 </script>
 <style scoped>
-.container {
-  /* height: 100vh;
-  display: flex;
-  align-items: center; */
-}
 </style>

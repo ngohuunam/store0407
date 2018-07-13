@@ -1,5 +1,35 @@
 // import Vue from 'vue'
-const loading = require('@/assets/loading.jpg')
+// const loading = require('@/assets/loading.jpg')
+
+export const clearModal = state => {
+  state.modal = []
+}
+
+export const toModal = (state, cardObj) => {
+  state.modal = cardObj.id.map((_id, i) => {
+    const color = _id.substring(_id.indexOf('.') + 1, _id.indexOf('-'))
+    const sizeObjs = cardObj.info.quantity[color]
+    const base64 = [cardObj.base64[i]]
+    let hexs
+    let sizes = []
+    for (let key in sizeObjs) {
+      const size = key
+      const price = sizeObjs[key].price
+      hexs = [sizeObjs[key].hex]
+      const quantity = sizeObjs[key].quantity
+      const _size = `Size ${size}: ${price}.000đ, SL: ${quantity}`
+      sizes.push(_size)
+    }
+    return {
+      name: _id,
+      base64: base64,
+      info: {
+        hexs: hexs,
+        sizes: sizes,
+      },
+    }
+  })
+}
 
 export const fetchList = (state, rxSetListDoc) => {
   state.list = rxSetListDoc
@@ -13,8 +43,8 @@ export const init = (state, rxdb) => {
   if (state.list.value && state.list.value.length) {
     state.ready = true
     const list = state.list.value
-    list.map(name => {
-      state.cards.push({ name: name, base64: loading, picked: false, info: {} })
+    list.forEach(name => {
+      state.cards.push({ name: name, id: [], base64: [], picked: false, info: {} })
     })
   }
 }
@@ -22,7 +52,8 @@ export const init = (state, rxdb) => {
 export const pushImgObj = (state, imgObj) => {
   const index = state.cards.findIndex(card => card.name === imgObj.name)
   if (index > -1) {
-    state.cards[index].base64 = imgObj.base64
+    state.cards[index].base64 = state.cards[index].base64.concat(imgObj.base64)
+    state.cards[index].id = state.cards[index].id.concat(imgObj.id)
   } else state.cards.push(imgObj)
 }
 

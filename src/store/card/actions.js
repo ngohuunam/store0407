@@ -1,16 +1,18 @@
 import { filter } from 'rxjs/operators'
-const loading = require('@/assets/loading.jpg')
+// const loading = require('@/assets/loading.jpg')
 
 export const init = ({ state, commit, rootState, dispatch }) => {
+  console.log('init')
   if (!state.ready) {
     const rxdb = rootState.rxdb
-    if (rxdb) {
+    if (rxdb && rxdb.list) {
       rxdb.list
         .findOne('set')
         .exec()
         .then(rxSetListDoc => {
           // console.log(rxSetListDoc)
           if (rxSetListDoc) {
+            console.log('fetchList')
             commit('fetchList', rxSetListDoc)
             commit('init', rxdb)
             dispatch('fetchCards')
@@ -40,7 +42,7 @@ export const subsImg = ({ commit, state, dispatch }) => {
     const name = data.doc
     switch (event) {
       case 'INSERT':
-        commit('pushImgObj', { name: name, data: loading, picked: false, info: {} })
+        commit('pushImgObj', { name: name, id: [], base64: [], picked: false, info: {} })
         break
       case 'UPDATE':
         dispatch('fetchImg', name)
@@ -69,8 +71,8 @@ export const fetchImg = ({ commit, state }, setName) => {
         const rxImageAtts = rxImageDoc.allAttachments()
         if (rxImageAtts.length) {
           // rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, base64: base64, picked: false, info: {} })))
-          rxImageAtts[0].getStringData().then(base64 => commit('pushImgObj', { name: setName, base64: base64, picked: false, info: {} }))
-        } else commit('pushImgObj', { name: setName, base64: loading, picked: false, info: {} })
+          rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: setName, id: [rxImageAtt.id], base64: [base64], picked: false, info: {} })))
+        } else commit('pushImgObj', { name: setName, id: [], base64: [], picked: false, info: {} })
       }
     })
 }
@@ -83,7 +85,7 @@ export const fetchInfo = ({ commit, state }, setName) => {
       // console.log(rxDocs)
       if (rxItemDocs && rxItemDocs.length) {
         const info = fetchData(rxItemDocs)
-        const infoObj = { name: setName, base64: loading, picked: false, info: info }
+        const infoObj = { name: setName, id: [], base64: [], picked: false, info: info }
         commit('pushInfoObj', infoObj)
       } else commit('spliceCard', setName)
     })

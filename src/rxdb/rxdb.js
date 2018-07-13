@@ -22,7 +22,7 @@ const _create = async function() {
   db.waitForLeadership().then(() => {
     document.title = '♛ ' + document.title
   })
-  await coll(db)
+  coll(db)
   return db
 }
 
