@@ -62,11 +62,24 @@ export const init = (state, rxdb) => {
   }
 }
 
+export const refreshImgObj = (state, info) => {
+  const card = state.cards.find(card => card.name === info.name)
+  const imgIds = card.id
+  const imgDeleteds = imgIds.filter(id => info.ids.indexOf(id) < 0)
+  imgDeleteds.map(imgDeleted => {
+    const index = card.id.indexOf(imgDeleted)
+    card.id.splice(index, 1)
+    card.base64.splice(index, 1)
+  })
+}
+
 export const pushImgObj = (state, imgObj) => {
   const index = state.cards.findIndex(card => card.name === imgObj.name)
   if (index > -1) {
-    state.cards[index].base64 = state.cards[index].base64.concat(imgObj.base64)
-    state.cards[index].id = state.cards[index].id.concat(imgObj.id)
+    if (state.cards[index].id.indexOf(imgObj.id) < 0) {
+      state.cards[index].base64 = state.cards[index].base64.concat(imgObj.base64)
+      state.cards[index].id = state.cards[index].id.concat(imgObj.id)
+    }
   } else state.cards.push(imgObj)
 }
 

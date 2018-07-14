@@ -10,7 +10,6 @@ export const init = ({ state, commit, rootState, dispatch }) => {
         .findOne('set')
         .exec()
         .then(rxSetListDoc => {
-          // console.log(rxSetListDoc)
           if (rxSetListDoc) {
             console.log('fetchList')
             commit('fetchList', rxSetListDoc)
@@ -27,10 +26,10 @@ export const init = ({ state, commit, rootState, dispatch }) => {
 export const subsItem = ({ commit, state, dispatch }) => {
   const item$ = state.rxItem.$.pipe(filter(x => x != null)).subscribe(change => {
     console.log('item$ change: ', change)
-    const setName = change.data.v.zet
+    const doc = change.data.doc
+    const setName = doc.slice(0, doc.indexOf('.'))
     if (setName) dispatch('fetchInfo', setName)
   })
-  // console.log('item$: ', item$)
   commit('subsItem', item$)
 }
 
@@ -51,7 +50,6 @@ export const subsImg = ({ commit, state, dispatch }) => {
         commit('spliceCard', name)
     }
   })
-  // console.log(img$)
   commit('subsImg', img$)
 }
 
@@ -68,9 +66,9 @@ export const fetchImg = ({ commit, state }, setName) => {
     .exec()
     .then(rxImageDoc => {
       if (rxImageDoc) {
+        commit('refreshImgObj', { name: setName, ids: rxImageDoc.imgs })
         const rxImageAtts = rxImageDoc.allAttachments()
         if (rxImageAtts.length) {
-          // rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: name, base64: base64, picked: false, info: {} })))
           rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: setName, id: [rxImageAtt.id], base64: [base64], picked: false, info: {} })))
         } else commit('pushImgObj', { name: setName, id: [], base64: [], picked: false, info: {} })
       }
@@ -82,7 +80,6 @@ export const fetchInfo = ({ commit, state }, setName) => {
     .find({ $and: [{ zet: { $eq: setName } }, { quantity: { $gt: 0 } }] })
     .exec()
     .then(rxItemDocs => {
-      // console.log(rxDocs)
       if (rxItemDocs && rxItemDocs.length) {
         const info = fetchData(rxItemDocs)
         const infoObj = { name: setName, id: [], base64: [], picked: false, info: info }
@@ -116,6 +113,5 @@ const fetchData = rxDocs => {
     res.quantity[rxDoc.size][rxDoc.color].item = rxDoc.name
     return res
   }, _res)
-  // console.log('infoObj: ', infoObj)
   return infoObj
 }
