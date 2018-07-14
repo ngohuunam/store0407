@@ -64,29 +64,29 @@ export const init = (state, rxdb) => {
 
 export const refreshImgObj = (state, info) => {
   const card = state.cards.find(card => card.name === info.name)
-  const imgIds = card.id
-  const imgDeleteds = imgIds.filter(id => info.ids.indexOf(id) < 0)
-  imgDeleteds.map(imgDeleted => {
-    const index = card.id.indexOf(imgDeleted)
+  const idDeleteds = card.id.filter(_id => info.ids.indexOf(_id) < 0)
+  idDeleteds.map(idDeleted => {
+    const index = card.id.indexOf(idDeleted)
     card.id.splice(index, 1)
     card.base64.splice(index, 1)
   })
 }
 
 export const pushImgObj = (state, imgObj) => {
-  const index = state.cards.findIndex(card => card.name === imgObj.name)
-  if (index > -1) {
-    if (state.cards[index].id.indexOf(imgObj.id) < 0) {
-      state.cards[index].base64 = state.cards[index].base64.concat(imgObj.base64)
-      state.cards[index].id = state.cards[index].id.concat(imgObj.id)
+  const card = state.cards.find(card => card.name === imgObj.name)
+  if (card) {
+    const i = card.id.indexOf(imgObj.id)
+    if (i < 0) {
+      card.base64 = card.base64.concat(imgObj.base64)
+      card.id = card.id.concat(imgObj.id)
     }
   } else state.cards.push(imgObj)
 }
 
 export const pushInfoObj = (state, infoObj) => {
-  const index = state.cards.findIndex(card => card.name === infoObj.name)
-  if (index > -1) {
-    state.cards[index].info = infoObj.info
+  const card = state.cards.find(card => card.name === infoObj.name)
+  if (card) {
+    card.info = infoObj.info
   } else state.cards.push(infoObj)
 }
 

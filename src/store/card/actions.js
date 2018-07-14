@@ -69,7 +69,7 @@ export const fetchImg = ({ commit, state }, setName) => {
         commit('refreshImgObj', { name: setName, ids: rxImageDoc.imgs })
         const rxImageAtts = rxImageDoc.allAttachments()
         if (rxImageAtts.length) {
-          rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: setName, id: [rxImageAtt.id], base64: [base64], picked: false, info: {} })))
+          rxImageAtts.forEach(rxImageAtt => rxImageAtt.getStringData().then(base64 => commit('pushImgObj', { name: setName, id: rxImageAtt.id, base64: base64, picked: false, info: {} })))
         } else commit('pushImgObj', { name: setName, id: [], base64: [], picked: false, info: {} })
       }
     })
