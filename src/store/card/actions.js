@@ -92,7 +92,7 @@ export const fetchInfo = ({ commit, state }, setName) => {
 }
 
 const fetchData = rxDocs => {
-  const _res = { name: '', item: '', hexs: [], sizes: [], price: 0, disc: 0, quantity: {}, info: [] }
+  const _res = { name: '', hexs: [], sizes: [], price: 0, disc: 0, quantity: {}, info: [] }
   const infoObj = rxDocs.reduce((res, rxDoc) => {
     res.name = rxDoc.zet
     res.info = rxDoc.info

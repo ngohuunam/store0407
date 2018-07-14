@@ -1,8 +1,8 @@
 <template>
   <div class="row m-b left">
-    <div v-if="isModal">
+    <div v-if="isModal" class="flex-col-right">
       <div v-for="size in sizes" :key="size.inf">
-        <b-checkbox v-model="$store.state.card.cart" :native-value="size">
+        <b-checkbox v-model="$store.state.card.cart" type="is-success" :native-value="size">
           {{size.inf}}
         </b-checkbox>
       </div>
@@ -32,4 +32,9 @@ export default {
 </script>
 
 <style scoped>
+.flex-col-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>

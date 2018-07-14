@@ -31,23 +31,40 @@ export function get() {
   return dbPromise
 }
 
+export async function syncOrder(phone) {
+  if (!dbPromise) dbPromise = await _create()
+  dbPromise.order.sync({
+    remote: remote + 'order',
+    options: {
+      live: true,
+      retry: true,
+    },
+    query: dbPromise.order
+      .find()
+      .where('phone')
+      .eq(phone),
+  })
+}
+
 const coll = db => {
   return Promise.all(
     rxCollInfo.map(colData => {
       const prom = new Promise((resolve, reject) => {
         db.collection(colData).then(
           col => {
-            col.sync({
-              remote: remote + colData.name,
-              direction: {
-                pull: true,
-                push: false,
-              },
-              options: {
-                live: true,
-                retry: true,
-              },
-            })
+            if (col.name !== 'order') {
+              col.sync({
+                remote: remote + colData.name,
+                direction: {
+                  pull: true,
+                  push: false,
+                },
+                options: {
+                  live: true,
+                  retry: true,
+                },
+              })
+            }
             resolve(col)
           },
           e => reject(e),

@@ -8,4 +8,5 @@ export default {
   item$: null,
   ready: false,
   cart: [],
+  order: [],
 }

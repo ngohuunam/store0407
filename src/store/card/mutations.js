@@ -1,8 +1,19 @@
 // import Vue from 'vue'
 // const loading = require('@/assets/loading.jpg')
 
+export const toOrder = (state, cartObjs) => {
+  state.order = state.order.concat(cartObjs)
+}
+
 export const clearModal = state => {
   state.modal = []
+}
+
+export const spliceCart = (state, cartItems) => {
+  cartItems.map(item => {
+    const i = state.cart.findIndex(cartObj => cartObj.item === item)
+    if (i > -1) state.cart.splice(i, 1)
+  })
 }
 
 export const toModal = (state, cardObj) => {
@@ -15,10 +26,11 @@ export const toModal = (state, cardObj) => {
     for (let key in sizeObjs) {
       const size = key
       const price = sizeObjs[key].price
+      const item = sizeObjs[key].item
       hexs = [sizeObjs[key].hex]
       const quantity = sizeObjs[key].quantity
-      const _size = `Size ${size}: ${price}.000đ, SL: ${quantity}`
-      sizes.push({ inf: _size, z: cardObj.name, id: _id, s: size, p: price, c: color, q: 1, h: sizeObjs[key].hex })
+      const inf = `Size ${size}: ${price}.000đ, SL: ${quantity}`
+      sizes.push({ item: item, inf: inf, z: cardObj.name, id: _id, s: size, p: price, c: color, q: 1, h: sizeObjs[key].hex })
     }
     return {
       zet: cardObj.name,

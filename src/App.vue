@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Grid</router-link> |
+    <!-- <div id="nav">
+      <router-link to="/">Home</router-link> |
       <router-link to="/swiper">Swiper</router-link> |
       <router-link to="/cart">Cart</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <keep-alive v-if="ready" include="grid">
-      <!-- <div v-if="ready"> -->
+    </div> -->
+    <!-- <keep-alive v-if="ready" include="grid"> -->
+    <div v-if="ready">
       <router-view />
-      <!-- </div> -->
-    </keep-alive>
+    </div>
+    <!-- </keep-alive> -->
     <div v-else>
       <img src="https://images.schoolofmotion.com/w950/57723666-611a-4e73-9b84-45d4d9ee4045/Simple_Colors.gif" style="width: 300px;" />
       <div>Loading...</div>
@@ -76,6 +76,7 @@ export default {
   margin: 1% auto;
   max-width: 100%;
   justify-content: space-around;
+  flex: 0 0 50%;
   align-items: center;
   z-index: 10;
   /* font-size: 5vw; */
@@ -111,9 +112,22 @@ export default {
 .card.end {
   align-items: flex-end;
 }
-/* .card img {
-  border-radius: 12px;
-  width: 93%;
-  height: 93%;
-} */
+.sticky {
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  position: fixed;
+  top: 65vh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+.float-btn {
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 25px;
+  float: left;
+  cursor: pointer !important;
+  margin-left: 2vw;
+}
 </style>
