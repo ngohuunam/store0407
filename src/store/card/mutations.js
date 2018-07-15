@@ -1,19 +1,23 @@
 // import Vue from 'vue'
 // const loading = require('@/assets/loading.jpg')
 
-export const toOrder = (state, cartObjs) => {
-  state.order = state.order.concat(cartObjs)
+export const moveTo = (state, info) => {
+  const to = info.des
+  console.log(to)
+  console.log(info)
+  state[to] = state[to].concat(info.objs)
+}
+
+export const spliceItem = (state, info) => {
+  const from = info.des
+  info.objs.map(obj => {
+    const i = state[from].findIndex(fromObj => fromObj.item === obj.item)
+    if (i > -1) state[from].splice(i, 1)
+  })
 }
 
 export const clearModal = state => {
   state.modal = []
-}
-
-export const spliceCart = (state, cartItems) => {
-  cartItems.map(item => {
-    const i = state.cart.findIndex(cartObj => cartObj.item === item)
-    if (i > -1) state.cart.splice(i, 1)
-  })
 }
 
 export const toModal = (state, cardObj) => {
@@ -33,8 +37,8 @@ export const toModal = (state, cardObj) => {
       sizes.push({ item: item, inf: inf, z: cardObj.name, id: _id, s: size, p: price, c: color, q: 1, h: sizeObjs[key].hex })
     }
     return {
-      zet: cardObj.name,
-      name: _id,
+      name: cardObj.name,
+      id: _id,
       base64: base64,
       info: {
         hexs: hexs,
@@ -52,6 +56,7 @@ export const init = (state, rxdb) => {
   if (rxdb) {
     state.rxItem = rxdb.item
     state.rxImage = rxdb.image
+    state.rxOrder = rxdb.order
   }
   if (state.list.value && state.list.value.length) {
     state.ready = true

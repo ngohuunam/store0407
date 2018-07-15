@@ -21,13 +21,9 @@ export default {
   name: 'CardSize',
   props: ['sizes', 'isModal'],
   data() {
-    return {
-      picked: [],
-    }
+    return {}
   },
-  created() {
-    this.picked = this.$store.state.card.cart
-  },
+  created() {},
 }
 </script>
 

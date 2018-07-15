@@ -4,7 +4,7 @@
     <a href="#" class="close bttn right" @click="closeModal"></a> -->
     <a class="delete is-large fixed left" @click="closeModal"></a>
     <a class="delete is-large fixed right" @click="closeModal"></a>
-    <swiper :cards="modal" :isModal="isModal" />
+    <swiper :cards="modal" :isModal="true" />
   </div>
 </template>
 
@@ -18,9 +18,7 @@ export default {
   created() {},
   mounted() {},
   data() {
-    return {
-      isModal: true,
-    }
+    return {}
   },
   watch: {},
   methods: {

@@ -8,6 +8,7 @@
     </div> -->
     <!-- <keep-alive v-if="ready" include="grid"> -->
     <div v-if="ready">
+      <SideBtn />
       <router-view />
     </div>
     <!-- </keep-alive> -->
@@ -19,8 +20,11 @@
 </template>
 
 <script>
+import SideBtn from '@/components/float-btn-side.vue'
+
 export default {
   name: 'App',
+  components: { SideBtn },
   data() {
     return {
       checkReadyInterval: null,
@@ -52,8 +56,6 @@ export default {
     },
     init() {
       this.$store.dispatch('init')
-      // this.$store.dispatch('image/init')
-      // this.$store.dispatch('item/init')
       this.$store.dispatch('card/init')
     },
   },
@@ -70,29 +72,14 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  height: 3%;
-  display: flex;
-  margin: 1% auto;
-  max-width: 100%;
-  justify-content: space-around;
-  flex: 0 0 50%;
-  align-items: center;
-  z-index: 10;
-  /* font-size: 5vw; */
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 .row {
   width: 100%;
   display: flex;
   align-items: center;
+}
+.col {
+  display: flex;
+  flex-direction: column;
 }
 .row.end {
   align-items: flex-end;
@@ -113,21 +100,25 @@ export default {
   align-items: flex-end;
 }
 .sticky {
-  max-width: 1024px;
-  width: 100%;
+  /* max-width: 1024px;
+  width: 100%; */
   margin: auto;
   position: fixed;
-  top: 65vh;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
+}
+.sticky.side {
+  top: 60vh;
+}
+.sticky.bottom {
+  bottom: 1vh;
+  margin-left: 5px;
 }
 .float-btn {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 25px;
-  float: left;
+  padding: 1.2rem;
   cursor: pointer !important;
-  margin-left: 2vw;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 </style>

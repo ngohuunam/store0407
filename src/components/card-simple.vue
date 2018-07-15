@@ -1,14 +1,15 @@
 <template>
-  <div class="card" :style="`font-size: ${fontSize}em;`">
-    <div class="row end card-img" :style="`height:${height}px;background-image: url('${bgImg}')`">
-      <div v-if="ratio > 0 && ratio < 1.779" class="card-info">
-        <card-price v-if="ratio < 1.779 && info.price" :price="info.price" />
+  <div class="my-card" :style="`font-size: ${fontSize}em;`">
+    <div class="row end my-card-img" :style="`height:${height}px;background-image: url('${bgImg}')`">
+      <div v-if="ratio > 0 && ratio < 1.779" class="my-card-info">
+        <div>## {{name}} </div>
+        <card-price v-if="ratio < 1.779 && (info.priceMin || info.priceMax)" :priceMin="info.priceMin" :priceMax="info.priceMax" />
         <card-color v-if="ratio < 1.51" :hexs="info.hexs" />
-        <card-size v-if="ratio > 1 && ratio < 1.34" :sizes="info.sizes" :quantity="info.quantity" />
+        <card-size v-if="ratio > 1 && ratio < 1.34" :sizes="info.sizes" :isModal="isModal" />
       </div>
     </div>
-    <div v-if="ratio < 1 || ratio > 1.34" class="card-info">
-      <card-price v-if="ratio > 1.78 && info.price" :price="info.price" />
+    <div v-if="ratio < 1 || ratio > 1.34" class="my-card-info">
+      <card-price v-if="ratio > 1.78 && (info.priceMin || info.priceMax)" :priceMin="info.priceMin" :priceMax="info.priceMax" />
       <card-color v-if="ratio > 1.5" :hexs="info.hexs" />
       <card-size v-if="ratio < 1 || ratio > 1.34" :sizes="info.sizes" :isModal="isModal" />
     </div>
@@ -22,7 +23,7 @@ import cardSize from '@/components/card-size.vue'
 
 export default {
   name: 'Card',
-  props: ['bgImg', 'info', 'isModal'],
+  props: ['bgImg', 'info', 'name', 'isModal'],
   components: { 'card-color': cardColor, 'card-price': cardPrice, 'card-size': cardSize },
   created() {
     this.ratio = window.innerHeight / window.innerWidth
@@ -46,7 +47,8 @@ export default {
 </script>
 
 <style>
-.card {
+.my-card {
+  text-align: left;
   display: flex;
   flex: 0 0 48%;
   align-items: center;
@@ -56,17 +58,18 @@ export default {
   box-shadow: 0.1vw 0.1vw 0.5vw rgba(0, 0, 0, 0.3);
   margin-bottom: 1vw;
 }
-.card > .card-img {
-  display: flex;
-  justify-content: center;
+.my-card-img {
+  /* display: flex;
+  justify-content: center; */
   background-size: 100% 100%;
   border-radius: 0.3vw;
 }
-.card-info {
+.my-card-info {
   width: 96%;
+  margin-left: 2%;
 }
 @media (min-width: 1025px) {
-  .card {
+  .my-card {
     flex: 0 0 31.3%;
   }
 }

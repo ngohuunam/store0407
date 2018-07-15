@@ -4,6 +4,7 @@ export default {
   list: [],
   rxItem: {},
   rxImage: {},
+  rxOrder: {},
   img$: null,
   item$: null,
   ready: false,

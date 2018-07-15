@@ -1,46 +1,56 @@
 <template>
-  <div>
-    <div class="sticky">
-      <b-icon icon="home-outline" type="is-info" size="is-medium" class="float-btn" @click.native="$router.push('/')" />
-      <!-- <b-icon icon="cart-off" type="is-danger" size="is-medium" class="float-btn" @click.native="cartOff" /> -->
-      <!-- <b-icon icon="calendar-check" size="is-medium" class="float-btn" @click.native="order" /> -->
-    </div>
-    <b-table v-if="order.length" :data="order" :mobile-cards="false" narrowed>
-      <template slot-scope="props">
-        <b-table-column label="Prod" centered>
-          <img :src="findImg(props.row)" />
-        </b-table-column>
+  <div class="order">
+    <div v-if="order.length">
+      <b-table :data="order" :mobile-cards="false" checkable :checked-rows.sync="orderChecked" narrowed>
+        <template slot-scope="props">
+          <b-table-column label="Prod" centered>
+            <img :src="findImg(props.row)" />
+          </b-table-column>
 
-        <b-table-column label="Info" width="400" numeric>
-          <div class="row right">
-            <div :style="`background-color:${props.row.h}; padding: 10px 20px; margin: 0 5px;`"></div>
-            <div> S: {{ props.row.s }}, {{ props.row.p + '.000đ' }} x {{ props.row.q }} = {{ (props.row.p * props.row.q) + '.000đ' }} </div>
-          </div>
-        </b-table-column>
-      </template>
-      <template slot="footer">
-        <div class="has-text-right">Grand total: {{total() + '.000đ'}}</div>
-      </template>
-    </b-table>
+          <b-table-column label="Info" style="width: 90%" numeric>
+            <div class="row right">
+              <div :style="`background-color:${props.row.h};`" class="color"></div>
+              <div>{{info(props.row)}}</div>
+            </div>
+          </b-table-column>
+        </template>
+        <template slot="footer">
+          <div class="has-text-right">Grand total: {{total() + '.000đ'}}</div>
+        </template>
+      </b-table>
+    </div>
+    <BottomBtn v-if="orderChecked.length" @leftClick="toCart" @rightClick="placeOrder" />
   </div>
 </template>
 
 <script>
+import BottomBtn from '@/components/float-btn-bottom.vue'
+
 export default {
   name: 'Order',
   data() {
-    return {}
+    return {
+      orderChecked: [],
+    }
   },
-  components: {},
-  mounted() {
-    if (!this.order.length) this.$router.push('/')
+  components: { BottomBtn },
+  created() {
+    if (!this.order.length) this.$router.push('/cart')
   },
   methods: {
     placeOrder() {
       console.log('placeOrder')
     },
-    findImg(cartObj) {
-      if (cartObj) return this.$store.getters['card/img'](cartObj)
+    toCart() {
+      this.$store.commit('card/moveTo', { des: 'cart', objs: this.orderChecked })
+      this.$store.commit('card/spliceItem', { des: 'order', objs: this.orderChecked })
+      this.orderChecked = []
+    },
+    info(orderObj) {
+      if (orderObj) return `S: ${orderObj.s}, ${orderObj.p}.000đ x ${orderObj.q} = ${orderObj.p * orderObj.q}.000đ`
+    },
+    findImg(orderObj) {
+      if (orderObj) return this.$store.getters['card/img'](orderObj)
     },
     total() {
       return this.order.reduce((res, _item) => {
@@ -51,7 +61,7 @@ export default {
   },
   watch: {
     order: function() {
-      if (!this.cart.length) this.$router.push('/')
+      if (!this.order.length) this.$router.push('/cart')
     },
   },
   computed: {
@@ -63,5 +73,14 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
+.order {
+  font-size: 0.8rem;
+}
+.color {
+  width: 50%;
+  max-width: 40px;
+  padding: 10px 0px;
+  margin: 0 5px;
+}
 </style>

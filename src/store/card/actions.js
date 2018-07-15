@@ -89,13 +89,15 @@ export const fetchInfo = ({ commit, state }, setName) => {
 }
 
 const fetchData = rxDocs => {
-  const _res = { name: '', hexs: [], sizes: [], price: 0, disc: 0, quantity: {}, info: [] }
+  const _res = { name: '', hexs: [], sizes: [], priceMin: 0, priceMax: 0, disc: 0, quantity: {}, info: [] }
   const infoObj = rxDocs.reduce((res, rxDoc) => {
     res.name = rxDoc.zet
     res.info = rxDoc.info
     if (res.hexs.indexOf(rxDoc.hex) < 0) res.hexs.push(rxDoc.hex)
     if (res.sizes.indexOf(rxDoc.size) < 0) res.sizes.push(rxDoc.size)
-    res.price = rxDoc.price > res.price ? rxDoc.price : res.price
+    if (res.priceMin === 0) res.priceMin = rxDoc.price
+    res.priceMin = rxDoc.price < res.priceMin ? rxDoc.price : res.priceMin
+    res.priceMax = rxDoc.price > res.priceMax ? rxDoc.price : res.priceMax
     res.disc = rxDoc.disc > res.disc ? rxDoc.disc : res.disc
     if (!res.quantity[rxDoc.color]) res.quantity[rxDoc.color] = {}
     if (!res.quantity[rxDoc.color][rxDoc.size]) res.quantity[rxDoc.color][rxDoc.size] = {}

@@ -1,7 +1,7 @@
 <template>
   <div class="swiper-container" :style="`height:${swiperH}px;`">
     <div class="swiper-wrapper">
-      <card-simple ref="card" class="swiper-slide" v-for="(card, i) in cards" :key="card.name" :isModal="isModal" :info="card.info" :bgImg="bgImg(i)" />
+      <card-simple ref="card" class="swiper-slide" v-for="(card, i) in cards" :key="card.id" :name="card.name" :isModal="isModal" :info="card.info" :bgImg="bgImg(i)" />
     </div>
     <div v-if="!xs" class="swiper-button-prev" slot="button-prev"></div>
     <div v-if="!xs" class="swiper-button-next" slot="button-next"></div>

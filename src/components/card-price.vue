@@ -1,11 +1,20 @@
 <template>
-  <div class="row price">{{price ? (price + '.000đ') : 'loading...'}}</div>
+  <div class="row price">{{price()}}</div>
 </template>
 
 <script>
 export default {
   name: 'CardPrice',
-  props: ['price'],
+  props: ['priceMin', 'priceMax'],
+  methods: {
+    price() {
+      if (this.priceMin || this.priceMax) {
+        if (this.priceMin === this.priceMax) return `${this.priceMin}.000đ`
+        const arrow = this.priceMin && this.priceMax ? ' => ' : ''
+        return `${this.priceMin ? `${this.priceMin}.000đ` : ''}${arrow}${this.priceMax ? `${this.priceMax}.000đ` : ''}`
+      } else return 'loading...'
+    },
+  },
 }
 </script>
 
